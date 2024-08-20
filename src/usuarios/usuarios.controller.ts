@@ -13,6 +13,7 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { AplicacionesService } from 'src/aplicaciones/aplicaciones.service';
 import { Response } from 'express';
+import { ApiResponse } from '@nestjs/swagger';
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -46,6 +47,8 @@ export class UsuariosController {
     return this.usuariosService.remove(+id);
   }
 
+  @ApiResponse({ status: 200, description: 'la aplicacion se ha descargado' })
+  @ApiResponse({ status: 404, description: 'la aplicacion no existe' })
   @Post(':nombreUsuario/aplicaciones/:idAplicacion')
   descargarAplicacion(
     @Param('nombreUsuario') nombreUsuario: string,
